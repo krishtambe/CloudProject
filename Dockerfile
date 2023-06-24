@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 
 # Update the repository sources list
@@ -21,23 +21,23 @@ RUN mkdir -p /data/
 WORKDIR /data
 
 # perform git clone
-RUN git clone https://github.com/anilbidari/CloudenabledWebApp.git
+RUN git clone https://github.com/krishtambe/CloudProject.git
 
 # switch to cloudenabledwebapp directory
-WORKDIR /data/CloudenabledWebApp
+WORKDIR /data/CloudProject
 
 # use maven to package
 RUN mvn package
 
  
 # install tomcat7
-RUN apt-get install -y tomcat7
+RUN apt-get install -y tomcat8
 
 # switch to cloudenabledwebapp directory
-WORKDIR /data/CloudenabledWebApp/target/
+WORKDIR /data/CloudProject/target/
 
 # copy war file
-RUN cp /data/CloudenabledWebApp/target/CloudenabledWebApp.war /var/lib/tomcat7/webapps/
+RUN cp /data/CloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
 
 
 
