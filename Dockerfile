@@ -12,18 +12,6 @@ RUN apt-get -y install curl
 #install maven and nano
 RUN apt-get -y install nano maven
 
-#create direcory
-RUN mkdir /usr/local/tomcat
-
-#Download tomcat8
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.90/bin/apache-tomcat-8.5.90.tar.gz -O /tmp/tomcat.tar.gz
-
-#Copy file to temp and extract
-RUN cd /tmp && tar xvfz tomcat.tar.gz
-
-#Copy files from tmp to /usr/local dir
-RUN cp -Rv /tmp/apache-tomcat-8.5.90/* /usr/local/tomcat/
-
 #Create a data directory
 RUN mkdir -p /data/
 
@@ -42,8 +30,20 @@ RUN mvn package
 #Switch to CloudProject/target directory
 RUN /data/CloudProject/target/
 
+#create direcory
+RUN mkdir /usr/local/tomcat
+
+#Download tomcat8
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.90/bin/apache-tomcat-8.5.90.tar.gz -O /tmp/tomcat.tar.gz
+
+#Copy file to temp and extract
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+
+#Copy files from tmp to /usr/local dir
+RUN cp -Rv /tmp/apache-tomcat-8.5.90/* /usr/local/tomcat/
+
 #Copy the war file
-RUN cp /dataCloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
+#RUN cp /data/CloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
 
 #Expose the 8080 port
 EXPOSE 8080
