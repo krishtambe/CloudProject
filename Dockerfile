@@ -49,7 +49,7 @@ RUN cp /dataCloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
 EXPOSE 8080
 
 #Default port to execute the entrypoint
-CMD["--port 8080"]
+CMD ["--port 8080"]
 
 #Run the tomcat 
 CMD /usr/local/tomcat/bin/catalina.sh run
