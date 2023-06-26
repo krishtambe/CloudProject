@@ -28,7 +28,7 @@ WORKDIR /data/CloudProject
 RUN mvn package
 
 #Switch to CloudProject/target directory
-RUN /data/CloudProject/target/
+#RUN /data/CloudProject/target/
 
 #create direcory
 RUN mkdir /usr/local/tomcat
