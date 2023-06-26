@@ -1,54 +1,20 @@
-# Set the base image to Ubuntu
 FROM ubuntu:18.04
 
-
-# Update the repository sources list
-RUN apt-get update
-
-################## BEGIN INSTALLATION ######################
-# Install opejdk
-RUN apt-get install -y default-jdk
-
-# install git and maven
-RUN  apt-get install -y  git maven
-
-
-# Create the default data directory
-RUN mkdir -p /data/
-
-# switch to new directory
-
-WORKDIR /data
-
-# perform git clone
-RUN git clone https://github.com/krishtambe/CloudProject.git
-
-# switch to cloudenabledwebapp directory
-WORKDIR /data/CloudProject
-
-# use maven to package
-RUN mvn package
-
- 
-# install tomcat7
-RUN apt-get install -y tomcat8
-
-# switch to cloudenabledwebapp directory
-WORKDIR /data/CloudProject/target/
-
-# copy war file
-RUN cp /data/CloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
-
-
-
-# Expose the default port
+#update the repo
+RUN apt-get -y update && apt-get -y upgrade
+#install jdk and wget and git
+RUN apt-get -y install openjdk-8-jdk wget git
+#install curl
+RUN apt-get -y install curl
+#create direcory
+RUN mkdir /usr/local/tomcat
+#Download tomcat8
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.90/bin/apache-tomcat-8.5.90.tar.gz -O /tmp/tomcat.tar.gz
+#Copy file to temp and extract
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+#Copy files from tmp to /usr/local dir
+RUN cp -Rv /tmp/apache-tomcat-8.5.90/* /usr/local/tomcat/
+#Expose the 8080 port
 EXPOSE 8080
-
-# Default port to execute the entrypoint 
-CMD ["--port 8080"]
-
-# Set default container command
-ENTRYPOINT /bin/bash
-
-
-##################### INSTALLATION END #####################
+#Run the tomcat 
+CMD /usr/local/tomcat/bin/catalina.sh run
