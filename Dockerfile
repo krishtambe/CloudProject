@@ -52,7 +52,7 @@ EXPOSE 8080
 CMD ["--port 8080"]
 
 #Run the tomcat server
-CMD sh /usr/local/tomcat/bin/startup.sh
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
 
 #Set default enrty point
 ENTRYPOINT /bin/bash
