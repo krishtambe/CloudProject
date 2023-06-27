@@ -54,8 +54,7 @@ CMD ["--port 8080"]
 #give the execute permission to catalina.sh
 CMD chmod +x /usr/local/tomcat/bin/catalina.sh
 
-#Start the tomcat server
-CMD  ["catalina.sh", "run"]
+CMD ["catalina.sh", "run"]
 
 #Set default enrty point
 ENTRYPOINT /bin/bash
