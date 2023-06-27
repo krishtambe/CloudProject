@@ -28,7 +28,7 @@ WORKDIR /data/CloudProject
 RUN mvn package
 
 #Switch to CloudProject/target directory
-#RUN /data/CloudProject/target/
+WORKDIR /data/CloudProject/target/
 
 #create direcory
 RUN mkdir /usr/local/tomcat
@@ -43,7 +43,7 @@ RUN cd /tmp && tar xvfz tomcat.tar.gz
 RUN cp -Rv /tmp/apache-tomcat-8.5.90/* /usr/local/tomcat/
 
 #Copy the war file
-#RUN cp /data/CloudProject/target/CloudProject.war /var/lib/tomcat8/webapps/
+RUN cp /data/CloudProject/target/CloudProject.war /usr/local/tomcat/webapps
 
 #Expose the 8080 port
 EXPOSE 8080
