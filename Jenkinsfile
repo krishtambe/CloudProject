@@ -5,4 +5,8 @@ node {
     stage ('Build the docker image'){
         sh 'sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
     }
+    stage ('tag the docker image'){
+        sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID tambekrish/$JOB_NAME:v1.$BUILD_ID'
+        sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID tambekrish/$JOB_NAME:v1.latest'
+    }
 }
