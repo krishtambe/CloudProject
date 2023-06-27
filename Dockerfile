@@ -1,16 +1,16 @@
 FROM ubuntu:18.04
 
 #update the repo
-RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get update -y && apt-get upgrade -y
 
 #install jdk and wget and git
-RUN apt-get -y install openjdk-8-jdk wget git
+RUN apt-get install openjdk-8-jdk wget git -y
 
 #install curl
-RUN apt-get -y install curl
+RUN apt-get install curl -y
 
 #install maven and nano
-RUN apt-get -y install nano maven
+RUN apt-get install nano maven -y
 
 #Create a data directory
 RUN mkdir -p /data/
