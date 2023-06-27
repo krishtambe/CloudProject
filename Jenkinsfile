@@ -9,4 +9,11 @@ node {
         sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID tambekrish/$JOB_NAME:v1.$BUILD_ID'
         sh 'sudo docker image tag $JOB_NAME:v1.$BUILD_ID tambekrish/$JOB_NAME:v1.latest'
     }
+    stage ('Push docker image to the dockerhub') {
+        withCredentials([string(credentialsId: 'docker-pwd', variable: 'docker-pwd')]) {
+             sh ('docker login -u tambekrish -p ${docker-pwd}')
+             sh 'sudo docker push tambekrish/$JOB_NAME:v1.$BUILD_ID'
+             sh 'sudo docker push tambekrish/$JOB_NAME:v1.latest'
+	}
+    }
 }
