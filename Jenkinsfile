@@ -17,7 +17,7 @@ node {
 	}
     }
     stage ('Run the container'){
-        sh 'sudo docker run -it --name webapp -p 5004:8080 $JOB_NAME:v1.$BUILD_ID'
+        sh 'sudo docker run -itd --name webapp -p 5004:8080 $JOB_NAME:v1.$BUILD_ID'
     }
     stage ('Start tomcat server'){
         sh 'sudo docker exec -d webapp /usr/local/tomcat/bin/catalina.sh run'
