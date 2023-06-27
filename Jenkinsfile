@@ -16,4 +16,7 @@ node {
              sh 'sudo docker push tambekrish/$JOB_NAME:v1.latest'
 	}
     }
+    stage ('Run the container'){
+        sh 'sudo docker run -itd --name webapp -p 5004:8080 $JOB_NAME:v1.$BUILD_ID'
+    }
 }
